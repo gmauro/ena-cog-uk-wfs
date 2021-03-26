@@ -37,5 +37,5 @@ fi
 date
 echo "Cleaning" 
 pwd
-rm -R $WORKDIR
+#rm -R $WORKDIR
 
