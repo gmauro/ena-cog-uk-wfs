@@ -14,7 +14,7 @@ JOB_YML_DIR='job-yml-templates'
 # start processing
 WORKDIR=$BOT_TAG'_run_'$(date '+%s')
 mkdir $WORKDIR &&
-
+echo "$JOB_YML_DIR/$JOB_YML"
 #generate the job.yml needed by planemo run
 cat "$JOB_YML_DIR/$JOB_YML" | python bioblend-scripts/find_datasets.py "$VCF_DATA" -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_TAG --collections-only -n 1 --from-template -o "$WORKDIR/$JOB_YML"
 
