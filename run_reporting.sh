@@ -13,6 +13,8 @@ JOB_YML_DIR='job-yml-templates'
 
 # start processing
 WORKDIR=$BOT_TAG'_run_'$(date '+%s')
+pwd
+echo $WORKDIR
 mkdir $WORKDIR
 date
 echo "Generating yaml file $JOB_YML_DIR/$JOB_YML"
