@@ -33,6 +33,6 @@ if [ -s "$WORKDIR/$JOB_YML" ]; then
     planemo -v run 4e9e995d3ce690bf "$WORKDIR/$JOB_YML" --history_name "$SOURCE_HISTORY_NAME - $DEST_NAME_SUFFIX" --galaxy_url 'https://usegalaxy.eu' --galaxy_user_key $API_KEY --engine external_galaxy 2>&1 > /dev/null | grep -o 'GET /api/histories/[^?]*\?' > "$WORKDIR/run_info.txt"
 fi
 date
-echo "Cleaning"
+echo "Cleaning" pwd
 rm -R $WORKDIR
 
