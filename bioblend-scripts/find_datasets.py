@@ -106,7 +106,7 @@ if __name__ == '__main__':
              'retrieved'
     )
     args = parser.parse_args()
-
+    print("ap:{}".format(args.api_key))
     gi = galaxy.GalaxyInstance(
         url=args.galaxy_url,
         key=args.api_key
