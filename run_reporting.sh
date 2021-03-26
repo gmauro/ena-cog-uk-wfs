@@ -17,7 +17,7 @@ pwd
 echo $WORKDIR
 mkdir $WORKDIR
 date
-echo "Generating yaml file $JOB_YML_DIR/$JOB_YML"
+echo "Generating yaml file $WORKDIR/$JOB_YML"
 #generate the job.yml needed by planemo run
 cat "$JOB_YML_DIR/$JOB_YML" | python3 bioblend-scripts/find_datasets.py "$VCF_DATA" -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_TAG --collections-only -n 1 --from-template -o "$WORKDIR/$JOB_YML"
 
@@ -30,9 +30,9 @@ if [ -s "$WORKDIR/$JOB_YML" ]; then
     SOURCE_HISTORY_ID=$(grep '#from_history_id:' "$WORKDIR/$JOB_YML" | cut -d ' ' -f 2-)
     SOURCE_HISTORY_NAME=$(grep '#from_history_name:' "$WORKDIR/$JOB_YML" | cut -d ' ' -f 2-)
     # wait for successful completion of workflow scheduling by planemo run, then tag the new history and retag the source history
-    (while [ ! -s "$WORKDIR/run_info.txt" ]; do sleep 60; done; DEST_HISTORY_ID=$(grep -m1 -o 'histories/[^?]*' "$WORKDIR/run_info.txt" | cut -d / -f 2) && python bioblend-scripts/tag_history.py $DEST_HISTORY_ID -g "https://usegalaxy.eu" -a $API_KEY -t $DEST_TAG && python bioblend-scripts/tag_history.py $SOURCE_HISTORY_ID -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_RESPONSE -r $BOT_TAG) &
+    #(while [ ! -s "$WORKDIR/run_info.txt" ]; do sleep 60; done; DEST_HISTORY_ID=$(grep -m1 -o 'histories/[^?]*' "$WORKDIR/run_info.txt" | cut -d / -f 2) && python bioblend-scripts/tag_history.py $DEST_HISTORY_ID -g "https://usegalaxy.eu" -a $API_KEY -t $DEST_TAG && python bioblend-scripts/tag_history.py $SOURCE_HISTORY_ID -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_RESPONSE -r $BOT_TAG) &
     # run the viral beacon WF
-    planemo -v run 4e9e995d3ce690bf "$WORKDIR/$JOB_YML" --history_name "$SOURCE_HISTORY_NAME - $DEST_NAME_SUFFIX" --galaxy_url 'https://usegalaxy.eu' --galaxy_user_key $API_KEY --engine external_galaxy 2>&1 > /dev/null | grep -o 'GET /api/histories/[^?]*\?' > "$WORKDIR/run_info.txt"
+    #planemo -v run 4e9e995d3ce690bf "$WORKDIR/$JOB_YML" --history_name "$SOURCE_HISTORY_NAME - $DEST_NAME_SUFFIX" --galaxy_url 'https://usegalaxy.eu' --galaxy_user_key $API_KEY --engine external_galaxy 2>&1 > /dev/null | grep -o 'GET /api/histories/[^?]*\?' > "$WORKDIR/run_info.txt"
 fi
 date
 echo "Cleaning" 
