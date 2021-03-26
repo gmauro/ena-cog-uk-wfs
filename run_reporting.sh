@@ -17,7 +17,7 @@ mkdir $WORKDIR
 date
 echo "Generating yaml file $JOB_YML_DIR/$JOB_YML"
 #generate the job.yml needed by planemo run
-cat "$JOB_YML_DIR/$JOB_YML" | python bioblend-scripts/find_datasets.py "$VCF_DATA" -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_TAG --collections-only -n 1 --from-template -o "$WORKDIR/$JOB_YML"
+cat "$JOB_YML_DIR/$JOB_YML" | python3 bioblend-scripts/find_datasets.py "$VCF_DATA" -g "https://usegalaxy.eu" -a $API_KEY -t $BOT_TAG --collections-only -n 1 --from-template -o "$WORKDIR/$JOB_YML"
 
 # TO DO: remove $BOT_TAG from history - as part of find_datasets.py or via separate script
 if [ -s "$WORKDIR/$JOB_YML" ]; then
