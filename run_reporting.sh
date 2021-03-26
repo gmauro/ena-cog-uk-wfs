@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # bot-specific settings
 BOT_TAG='bot-go-report'
 BOT_RESPONSE='report-bot-ok'
